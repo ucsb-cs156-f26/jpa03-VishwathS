@@ -32,7 +32,6 @@ To create a set of OAuth credentials (`GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECR
 
 ## To run on localhost: configure `.env` file:
 
-
 In the top level directory, use this command to copy `.env.SAMPLE` to `.env`.  Recall that you
 may need to use `ls -a` to get the files to show up, since they are hidden files on Unix-like systems.
 
@@ -93,20 +92,20 @@ With this done, you should be all set to run on localhost.
 
 Before you try to configure a dokku app for OAuth, do these steps *in this order*.  If you try them in a different order, things won't work properly.
 
-<b>Do not literally use <tt>jpa03-<i>yourGithubLogin</i></tt> in these instructions; substitute in your own github login in place of the words <tt><i>yourGithubLogin</i></tt></b>.
+<b>Do not literally use <tt>jpa03-<i>vishwaths</i></tt> in these instructions; substitute in your own github login in place of the words <tt><i>vishwaths</i></tt></b>.
 
 1. Configure the app on localhost using a `.env` file as explained above, and have the `.env` file open in an editor so that the values are handy.
-2. Create a new dokku app with <tt>dokku apps:create jpa03-<i>yourGithubLogin</i></tt>
+2. Create a new dokku app with <tt>dokku apps:create jpa03-<i>vishwaths</i></tt>
 3. Set the app to ones that keeps the git directotry around:
-   <tt>dokku git:set jpa03-<i>yourGithubLogin</i> keep-git-dir true</tt>
+   <tt>dokku git:set jpa03-<i>vishwaths</i> keep-git-dir true</tt>
 4. Use these commands to set up the configuration variables for the app.  Replace *value-from-env* in each case with the correct value from the .env file you configured for localhost:<br />
-   <tt>dokku config:set --no-restart jpa03-<i>yourGithubLogin</i> PRODUCTION=true</tt><br />
-   <tt>dokku config:set --no-restart jpa03-<i>yourGithubLogin</i> GOOGLE_CLIENT_ID=<i>value-from-env</i></tt><br />
-   <tt>dokku config:set --no-restart jpa03-<i>yourGithubLogin</i> GOOGLE_CLIENT_SECRET=<i>value-from-env</i></tt><br />
-   <tt>dokku config:set --no-restart jpa03-<i>yourGithubLogin</i> ADMIN_EMAILS=<i>value-from-env</i></tt><br />
+   <tt>dokku config:set --no-restart jpa03-<i>vishwaths</i> PRODUCTION=true</tt><br />
+   <tt>dokku config:set --no-restart jpa03-<i>vishwaths</i> GOOGLE_CLIENT_ID=<i>value-from-env</i></tt><br />
+   <tt>dokku config:set --no-restart jpa03-<i>vishwaths</i> GOOGLE_CLIENT_SECRET=<i>value-from-env</i></tt><br />
+   <tt>dokku config:set --no-restart jpa03-<i>vishwaths</i> ADMIN_EMAILS=<i>heloisa@ucsb.edu,phtcon@ucsb.edu,aylin268@ucsb.edu,vishwath@ucsb.edu,krithi826@ucsb.edu,ray501@ucsb.edu,dgkirschbaum@ucsb,komura@ucsb.edu,victor_c_nardi@ucsb.edu,wsong@ucsb.edu,ryan_ramos-noriega@ucsb.edu,djensen@ucsb.edu</i></tt><br />
 5. Deploy and link a postgres database using<br />
-   <tt>dokku postgres:create jpa03-<i>yourGithubLogin</i>-db</tt><br />
-   <tt>dokku postgres:link jpa03-<i>yourGithubLogin</i>-db jpa03-<i>yourGithubLogin</i> </tt> <br />
+   <tt>dokku postgres:create jpa03-<i>vishwaths</i>-db</tt><br />
+   <tt>dokku postgres:link jpa03-<i>vishwaths</i>-db jpa03-<i>vishwaths</i> </tt> <br />
 
    If you get a message like this, it is perfectly normal:
    ```
@@ -118,14 +117,14 @@ Before you try to configure a dokku app for OAuth, do these steps *in this order
    Just continue with the instructions.
 
 6. Build the app with regular `http` using the commands.  This will deploy an http only version of the app. When these commands complete, *you will still not be able to login yet, but you should be able to access the home page over `http`*:<br />
-   <tt>dokku git:sync jpa03-<i>yourGithubLogin</i> https://github.com/ucsb-cs156-f26/jpa03-<i>yourGithubLogin</i> main</tt><br />
-   <tt>dokku ps:rebuild jpa03-<i>yourGithubLogin</i></tt><br />
+   <tt>dokku git:sync jpa03-<i>vishwaths</i> https://github.com/ucsb-cs156-f26/jpa03-<i>vishwaths</i> main</tt><br />
+   <tt>dokku ps:rebuild jpa03-<i>vishwaths</i></tt><br />
 7. Now deploy https (encrypting) with these commands.
    This will deploy an https  version of the app.
    When these commands complete, *you should be able to login with OAuth*:<br />
-   <tt>dokku letsencrypt:set jpa03-<i>yourGithubLogin</i> email <i>yourEmail</i>@ucsb.edu</tt><br />
-   <tt>dokku letsencrypt:enable jpa03-<i>yourGithubLogin</i></tt><br />
-   <tt>dokku ps:rebuild jpa03-<i>yourGithubLogin</i></tt><br />
+   <tt>dokku letsencrypt:set jpa03-<i>vishwaths</i> email <i>yourEmail</i>@ucsb.edu</tt><br />
+   <tt>dokku letsencrypt:enable jpa03-<i>vishwaths</i></tt><br />
+   <tt>dokku ps:rebuild jpa03-<i>vishwaths</i></tt><br />
 
 For troubleshooting advice with OAuth, this page may help:
 
